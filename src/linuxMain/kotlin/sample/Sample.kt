@@ -19,11 +19,20 @@ fun main(): Unit = runBlocking {
         )!!
 
         val gameContext = GameContext(window)
+        val ship: SDL_Surface = alloc()
 
         paintScreen(gameContext)
 
+        val sdlEvent: SDL_Event = alloc()
 
         gameContext.loop {
+            sdlEvent.resolveInputs { event ->
+                when(event) {
+                    SDL_QUIT -> gameContext.quit()
+                }
+            }
+
+
 
         }
 
@@ -33,7 +42,6 @@ fun main(): Unit = runBlocking {
 
     }
 }
-
 
 @ExperimentalUnsignedTypes
 data class GameContext(
@@ -66,6 +74,14 @@ data class GameContext(
 sealed class GameState {
     object Running : GameState()
     object Done : GameState()
+}
+
+@ExperimentalUnsignedTypes
+fun SDL_Event.resolveInputs(func: (Uint32) -> Unit) {
+    SDL_PollEvent(this.ptr)
+
+    func(this.type)
+
 }
 
 
