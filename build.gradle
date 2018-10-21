@@ -42,8 +42,14 @@ kotlin {
         linuxTest {
         }
     }
-
 }
+
+task copyResources(type: Copy) {
+    from('res')
+    into('build/bin/linux/main/release/executable/res')
+}
+
+compileKotlinLinux.finalizedBy(copyResources)
 
 task runProgram {
     def buildType = 'release' // Change to 'debug' to run application with debug symbols.

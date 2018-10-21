@@ -1,4 +1,4 @@
-headers = SDL.h stdlib.h time.h
+headers = SDL.h stdlib.h time.h SDL_image.h
 entryPoint = SDL_main
 
 headerFilter = SDL* stdlib.h time.h
@@ -9,4 +9,4 @@ compilerOpts.linux = -D_REENTRANT
 compilerOpts.ios =
 
 linkerOpts.osx = -F ${System.getProperty("user.home")}/Library/Frameworks -F /Library/Frameworks -framework SDL2
-linkerOpts.linux = -L/usr/lib64 -L/usr/lib/x86_64-linux-gnu -L/lib/x86_64-linux-gnu/ -lSDL2
+linkerOpts.linux = -L/usr/lib64 -L/usr/lib/x86_64-linux-gnu -L/lib/x86_64-linux-gnu/ -lSDL2 -lSDL2_image
